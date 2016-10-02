@@ -13,10 +13,16 @@
          timeout="#{100}"
          onidle="startIdleMonitor()" rendered="#{(request.remoteUser != null)}"/>
        #{msg['logoff.soon.1']}
-       <p:toolbar style="height:90px">  
+       <p:toolbar style="height:75px"> 
+           
        		<p:toolbarGroup align="left"> 
-       			<p:graphicImage value="/resources/images/topo.jpg" rendered="true" />
+                                          
+       			<!--<p:graphicImage value="/resources/images/topo.jpg" rendered="true" />-->
        		</p:toolbarGroup> 
+            <p:toolbarGroup align="center"> 
+                <span id="cabecalhotexto" style="font-weight: bold ; font-size:44px;"> Sistema de Controle de Manutenção</span>
+                    <!--<p:graphicImage value="/resources/images/topo.jpg" rendered="true" />-->
+            </p:toolbarGroup> 
        		<p:toolbarGroup align="right">  
        			
        			<span id="usuario" style="font-weight: bold ; font-size:12px;"> #{request.remoteUser == null ? 'Visitante' : controleAcessoController.nmPessoa}</span>
