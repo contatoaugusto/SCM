@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/Template.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:define name="metadata" />
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <h:form id="formCadastroTipoEquipamento"  prependId="false" enctype="multipart/form-data">
+                <br />
+                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Atualizar Tipo de Equipamento">
+                    <div class="input-and-label"></div>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.EditTipoequipamentoLabel_txTipoEquipamento}" for="txTipoEquipamento" />
+                        <h:inputText style="width: 600px;" id="txTipoEquipamento" value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="#{bundle.EditTipoequipamentoTitle_txTipoEquipamento}" required="true" requiredMessage="#{bundle.EditTipoequipamentoRequiredMessage_txTipoEquipamento}"/>
+                    </h:panelGrid>
+                </p:fieldset>
+
+                <br />
+                <div class="buttons">
+                    <p:commandButton 
+                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.update}" update=":formCadastroTipoEquipamento" icon="ui-icon-check" />  
+                    <p:commandButton id="button_voltar"
+                            value="Voltar"
+                            action="/tipoequipamento/List.xhtml"
+                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+                </div>
+                    <br />
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>

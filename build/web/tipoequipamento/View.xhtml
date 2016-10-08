@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTipoequipamentoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTipoequipamentoLabel_idTipoEquipamento}"/>
+                    <h:outputText value="#{tipoequipamentoController.selected.idTipoEquipamento}" title="#{bundle.ViewTipoequipamentoTitle_idTipoEquipamento}"/>
+                    <h:outputText value="#{bundle.ViewTipoequipamentoLabel_txTipoEquipamento}"/>
+                    <h:outputText value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="#{bundle.ViewTipoequipamentoTitle_txTipoEquipamento}"/>
+                    <h:outputText value="#{bundle.ViewTipoequipamentoLabel_idAtivoTipoEquipamento}"/>
+                    <h:outputText value="#{tipoequipamentoController.selected.idAtivoTipoEquipamento}" title="#{bundle.ViewTipoequipamentoTitle_idAtivoTipoEquipamento}"/>
+                    <h:outputText value="#{bundle.ViewTipoequipamentoLabel_idExcluidoTipoEquipamento}"/>
+                    <h:outputText value="#{tipoequipamentoController.selected.idExcluidoTipoEquipamento}" title="#{bundle.ViewTipoequipamentoTitle_idExcluidoTipoEquipamento}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipoequipamentoController.destroyAndView}" value="#{bundle.ViewTipoequipamentoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTipoequipamentoEditLink}"/>
+                <br />
+                <h:commandLink action="#{tipoequipamentoController.prepareCreate}" value="#{bundle.ViewTipoequipamentoCreateLink}" />
+                <br />
+                <h:commandLink action="#{tipoequipamentoController.prepareList}" value="#{bundle.ViewTipoequipamentoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTipoequipamentoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
