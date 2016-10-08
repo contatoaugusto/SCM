@@ -19,11 +19,6 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-//import controleacesso.web.dao.ControleAcessoUsuarioDao;
-//import controleacesso.web.modelo.ControleAcessoPerfil;
-//import controleacesso.web.modelo.ControleAcessoRecurso;
-//import controleacesso.web.modelo.ControleAcessoUsuario;
-
 
 /**
  * Essa classe faz a implementação de autenticação, o que permite acessar detalhes do usuario existente
