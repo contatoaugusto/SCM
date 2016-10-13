@@ -7,14 +7,12 @@ package br.com.scm.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,33 +22,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author prohgy
  */
 @Entity
-@Table(name = "tipoequipamento")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tipoequipamento.findAll", query = "SELECT t FROM Tipoequipamento t"),
     @NamedQuery(name = "Tipoequipamento.findByIdTipoEquipamento", query = "SELECT t FROM Tipoequipamento t WHERE t.idTipoEquipamento = :idTipoEquipamento"),
     @NamedQuery(name = "Tipoequipamento.findByTxTipoEquipamento", query = "SELECT t FROM Tipoequipamento t WHERE t.txTipoEquipamento = :txTipoEquipamento"),
-    @NamedQuery(name = "Tipoequipamento.findByIdAtivoTipoEquipamento", query = "SELECT t FROM Tipoequipamento t WHERE t.idAtivoTipoEquipamento = :idAtivoTipoEquipamento"),
-    @NamedQuery(name = "Tipoequipamento.findByIdExcluidoTipoEquipamento", query = "SELECT t FROM Tipoequipamento t WHERE t.idExcluidoTipoEquipamento = :idExcluidoTipoEquipamento")})
+    @NamedQuery(name = "Tipoequipamento.findByIcAtivo", query = "SELECT t FROM Tipoequipamento t WHERE t.icAtivo = :icAtivo")})
 public class Tipoequipamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idTipoEquipamento")
     private Integer idTipoEquipamento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "txTipoEquipamento")
     private String txTipoEquipamento;
-    @Size(max = 2)
-    @Column(name = "idAtivoTipoEquipamento")
-    private String idAtivoTipoEquipamento;
-    @Size(max = 2)
-    @Column(name = "idExcluidoTipoEquipamento")
-    private String idExcluidoTipoEquipamento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    private String icAtivo;
 
     public Tipoequipamento() {
     }
@@ -59,9 +51,10 @@ public class Tipoequipamento implements Serializable {
         this.idTipoEquipamento = idTipoEquipamento;
     }
 
-    public Tipoequipamento(Integer idTipoEquipamento, String txTipoEquipamento) {
+    public Tipoequipamento(Integer idTipoEquipamento, String txTipoEquipamento, String icAtivo) {
         this.idTipoEquipamento = idTipoEquipamento;
         this.txTipoEquipamento = txTipoEquipamento;
+        this.icAtivo = icAtivo;
     }
 
     public Integer getIdTipoEquipamento() {
@@ -80,20 +73,12 @@ public class Tipoequipamento implements Serializable {
         this.txTipoEquipamento = txTipoEquipamento;
     }
 
-    public String getIdAtivoTipoEquipamento() {
-        return idAtivoTipoEquipamento;
+    public String getIcAtivo() {
+        return icAtivo;
     }
 
-    public void setIdAtivoTipoEquipamento(String idAtivoTipoEquipamento) {
-        this.idAtivoTipoEquipamento = idAtivoTipoEquipamento;
-    }
-
-    public String getIdExcluidoTipoEquipamento() {
-        return idExcluidoTipoEquipamento;
-    }
-
-    public void setIdExcluidoTipoEquipamento(String idExcluidoTipoEquipamento) {
-        this.idExcluidoTipoEquipamento = idExcluidoTipoEquipamento;
+    public void setIcAtivo(String icAtivo) {
+        this.icAtivo = icAtivo;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package br.com.scm.controller;
 
-import br.com.scm.entity.Tipoequipamento;
+import br.com.scm.entity.Tipomanutencao;
 import br.com.scm.controller.util.JsfUtil;
 import br.com.scm.controller.util.PaginationHelper;
-import br.com.scm.facade.TipoequipamentoFacade;
+import br.com.scm.facade.TipomanutencaoFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -19,33 +19,33 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("tipoequipamentoController")
+
+@Named("tipomanutencaoController")
 //@SessionScoped
 @RequestScoped
-public class TipoequipamentoController implements Serializable {
+public class TipomanutencaoController implements Serializable {
 
-    private Tipoequipamento current;
+
+    private Tipomanutencao current;
     private DataModel items = null;
-    @EJB
-    private br.com.scm.facade.TipoequipamentoFacade ejbFacade;
+    @EJB private br.com.scm.facade.TipomanutencaoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public TipoequipamentoController() {
+    public TipomanutencaoController() {
     }
 
-    public Tipoequipamento getSelected() {
+    public Tipomanutencao getSelected() {
         if (current == null) {
-            current = new Tipoequipamento();
+            current = new Tipomanutencao();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private TipoequipamentoFacade getFacade() {
+    private TipomanutencaoFacade getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -57,7 +57,7 @@ public class TipoequipamentoController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -70,13 +70,13 @@ public class TipoequipamentoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Tipoequipamento) getItems().getRowData();
+        current = (Tipomanutencao)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Tipoequipamento();
+        current = new Tipomanutencao();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -93,7 +93,7 @@ public class TipoequipamentoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Tipoequipamento) getItems().getRowData();
+        current = (Tipomanutencao)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -101,7 +101,7 @@ public class TipoequipamentoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle_SCM").getString("AlteracaoSucesso"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle_SCM").getString("AtualizacaoSucesso"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle_SCM").getString("AlteracaoErro"));
@@ -110,7 +110,7 @@ public class TipoequipamentoController implements Serializable {
     }
 
     public String destroy() {
-        current = (Tipoequipamento) getItems().getRowData();
+        current = (Tipomanutencao)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -144,14 +144,14 @@ public class TipoequipamentoController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -190,21 +190,21 @@ public class TipoequipamentoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Tipoequipamento getTipoequipamento(java.lang.Integer id) {
+    public Tipomanutencao getTipomanutencao(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Tipoequipamento.class)
-    public static class TipoequipamentoControllerConverter implements Converter {
+    @FacesConverter(forClass=Tipomanutencao.class)
+    public static class TipomanutencaoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TipoequipamentoController controller = (TipoequipamentoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tipoequipamentoController");
-            return controller.getTipoequipamento(getKey(value));
+            TipomanutencaoController controller = (TipomanutencaoController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tipomanutencaoController");
+            return controller.getTipomanutencao(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -224,11 +224,11 @@ public class TipoequipamentoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Tipoequipamento) {
-                Tipoequipamento o = (Tipoequipamento) object;
-                return getStringKey(o.getIdTipoEquipamento());
+            if (object instanceof Tipomanutencao) {
+                Tipomanutencao o = (Tipomanutencao) object;
+                return getStringKey(o.getIdTipoManutencao());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Tipoequipamento.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Tipomanutencao.class.getName());
             }
         }
 

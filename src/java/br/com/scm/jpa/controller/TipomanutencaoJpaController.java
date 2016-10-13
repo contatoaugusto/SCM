@@ -5,7 +5,7 @@
  */
 package br.com.scm.jpa.controller;
 
-import br.com.scm.entity.Tipoequipamento;
+import br.com.scm.entity.Tipomanutencao;
 import br.com.scm.jpa.controller.exceptions.NonexistentEntityException;
 import br.com.scm.jpa.controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
@@ -22,9 +22,9 @@ import javax.transaction.UserTransaction;
  *
  * @author prohgy
  */
-public class TipoequipamentoJpaController implements Serializable {
+public class TipomanutencaoJpaController implements Serializable {
 
-    public TipoequipamentoJpaController(UserTransaction utx, EntityManagerFactory emf) {
+    public TipomanutencaoJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
@@ -35,12 +35,12 @@ public class TipoequipamentoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Tipoequipamento tipoequipamento) throws RollbackFailureException, Exception {
+    public void create(Tipomanutencao tipomanutencao) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            em.persist(tipoequipamento);
+            em.persist(tipomanutencao);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -56,12 +56,12 @@ public class TipoequipamentoJpaController implements Serializable {
         }
     }
 
-    public void edit(Tipoequipamento tipoequipamento) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Tipomanutencao tipomanutencao) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            tipoequipamento = em.merge(tipoequipamento);
+            tipomanutencao = em.merge(tipomanutencao);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -71,9 +71,9 @@ public class TipoequipamentoJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = tipoequipamento.getIdTipoEquipamento();
-                if (findTipoequipamento(id) == null) {
-                    throw new NonexistentEntityException("The tipoequipamento with id " + id + " no longer exists.");
+                Integer id = tipomanutencao.getIdTipoManutencao();
+                if (findTipomanutencao(id) == null) {
+                    throw new NonexistentEntityException("The tipomanutencao with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -89,14 +89,14 @@ public class TipoequipamentoJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Tipoequipamento tipoequipamento;
+            Tipomanutencao tipomanutencao;
             try {
-                tipoequipamento = em.getReference(Tipoequipamento.class, id);
-                tipoequipamento.getIdTipoEquipamento();
+                tipomanutencao = em.getReference(Tipomanutencao.class, id);
+                tipomanutencao.getIdTipoManutencao();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tipoequipamento with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The tipomanutencao with id " + id + " no longer exists.", enfe);
             }
-            em.remove(tipoequipamento);
+            em.remove(tipomanutencao);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -112,19 +112,19 @@ public class TipoequipamentoJpaController implements Serializable {
         }
     }
 
-    public List<Tipoequipamento> findTipoequipamentoEntities() {
-        return findTipoequipamentoEntities(true, -1, -1);
+    public List<Tipomanutencao> findTipomanutencaoEntities() {
+        return findTipomanutencaoEntities(true, -1, -1);
     }
 
-    public List<Tipoequipamento> findTipoequipamentoEntities(int maxResults, int firstResult) {
-        return findTipoequipamentoEntities(false, maxResults, firstResult);
+    public List<Tipomanutencao> findTipomanutencaoEntities(int maxResults, int firstResult) {
+        return findTipomanutencaoEntities(false, maxResults, firstResult);
     }
 
-    private List<Tipoequipamento> findTipoequipamentoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Tipomanutencao> findTipomanutencaoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Tipoequipamento.class));
+            cq.select(cq.from(Tipomanutencao.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -136,20 +136,20 @@ public class TipoequipamentoJpaController implements Serializable {
         }
     }
 
-    public Tipoequipamento findTipoequipamento(Integer id) {
+    public Tipomanutencao findTipomanutencao(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Tipoequipamento.class, id);
+            return em.find(Tipomanutencao.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getTipoequipamentoCount() {
+    public int getTipomanutencaoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Tipoequipamento> rt = cq.from(Tipoequipamento.class);
+            Root<Tipomanutencao> rt = cq.from(Tipomanutencao.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

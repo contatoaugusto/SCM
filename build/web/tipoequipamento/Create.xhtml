@@ -9,32 +9,41 @@
     <ui:define name="metadata" />
     <ui:define name="content">
         <h:body style="font-size:small;padding:0px;">
-            <h:form id="formNovoTipoEquipamento"  prependId="false" enctype="multipart/form-data">
+            <h:form id="formNovo"  prependId="false" enctype="multipart/form-data">
                 <br />
                 <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Novo Tipo de Equipamento">
                     <div class="input-and-label"></div>
-                    <h:panelGrid columns="2">
-    <!--                    <h:outputLabel value="#{bundle.CreateTipoequipamentoLabel_idTipoEquipamento}" for="idTipoEquipamento" />
-                        <h:inputText id="idTipoEquipamento" value="#{tipoequipamentoController.selected.idTipoEquipamento}" title="#{bundle.CreateTipoequipamentoTitle_idTipoEquipamento}" required="true" requiredMessage="#{bundle.CreateTipoequipamentoRequiredMessage_idTipoEquipamento}"/>-->
-                        <h:outputLabel value="#{bundle.CreateTipoequipamentoLabel_txTipoEquipamento}" for="txTipoEquipamento" />
-                        <h:inputText id="txTipoEquipamento" value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="#{bundle.CreateTipoequipamentoTitle_txTipoEquipamento}" required="true" requiredMessage="#{bundle.CreateTipoequipamentoRequiredMessage_txTipoEquipamento}"/>
-    <!--                    <h:outputLabel value="#{bundle.CreateTipoequipamentoLabel_idAtivoTipoEquipamento}" for="idAtivoTipoEquipamento" />
-                        <h:inputText id="idAtivoTipoEquipamento" value="#{tipoequipamentoController.selected.idAtivoTipoEquipamento}" title="#{bundle.CreateTipoequipamentoTitle_idAtivoTipoEquipamento}" />
-                        <h:outputLabel value="#{bundle.CreateTipoequipamentoLabel_idExcluidoTipoEquipamento}" for="idExcluidoTipoEquipamento" />
-                        <h:inputText id="idExcluidoTipoEquipamento" value="#{tipoequipamentoController.selected.idExcluidoTipoEquipamento}" title="#{bundle.CreateTipoequipamentoTitle_idExcluidoTipoEquipamento}" />-->
-                    </h:panelGrid>
+                    <p:panelGrid columns="2">
+<!--Padrão para as paginas de manter. Copiar e colar trecho do início até aqui-->
+
+                        <p:outputLabel value="Nome:" for="txTipoEquipamento" />
+                        <p:inputText style="width: 600px;" id="txTipoEquipamento" value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="Nome tipo equipamento" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                        
+                        <p:outputLabel value="Ativo:" for="radio_ativo" />
+                        <p:selectOneRadio 
+                                        id="radio_ativo" 
+                                        value="#{tipoequipamentoController.selected.icAtivo}" 
+                                        required="true" 
+                                        requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
+                            <f:selectItem itemLabel="Sim" itemValue="S"/>  
+                            <f:selectItem itemLabel="Não" itemValue="N"/>  
+                        </p:selectOneRadio>
+                        
+<!--Pafrão pra as paginas manter. Copiar e colar esse trecho até o final do arquvo-->
+                    </p:panelGrid>
                 </p:fieldset>
-                   
                 <br />
                 <div class="buttons">
                     <p:commandButton 
-                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.create}" update="formNovoTipoEquipamento" icon="ui-icon-check" />  
+                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.create}" update="formNovo" icon="ui-icon-check" />  
                     <p:commandButton id="button_voltar"
                             value="Voltar"
                             action="/tipoequipamento/List.xhtml"
-                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
+                            ajax="false" onclick="form.target='_self'"/>
                 </div>
                 <br />
+                
             </h:form>
         </h:body>
     </ui:define>

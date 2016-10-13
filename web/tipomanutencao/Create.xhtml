@@ -11,34 +11,33 @@
         <h:body style="font-size:small;padding:0px;">
             <h:form id="formNovo"  prependId="false" enctype="multipart/form-data">
                 <br />
-                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Novo Tipo de Equipamento">
+                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Novo Tipo Manutenção">
                     <div class="input-and-label"></div>
                     <p:panelGrid columns="2">
 <!--Padrão para as paginas de manter. Copiar e colar trecho do início até aqui-->
 
-                        <p:outputLabel value="Nome:" for="txTipoEquipamento" />
-                        <p:inputText style="width: 600px;" id="txTipoEquipamento" value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="Nome tipo equipamento" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
-                        
-                        <p:outputLabel value="Ativo:" for="radio_ativo" />
+                    <p:outputLabel value="Nome:" for="txTipoManutencao" />
+                    <p:inputText style="width: 600px;" id="txTipoManutencao" value="#{tipomanutencaoController.selected.txTipoManutencao}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                    
+                    <p:outputLabel value="Ativo:" for="radio_ativo" />
                         <p:selectOneRadio 
-                                        id="radio_ativo" 
-                                        value="#{tipoequipamentoController.selected.icAtivo}" 
-                                        required="true" 
-                                        requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
-                            <f:selectItem itemLabel="Sim" itemValue="S"/>  
-                            <f:selectItem itemLabel="Não" itemValue="N"/>  
-                        </p:selectOneRadio>
-                        
+                                    id="radio_ativo" 
+                                    value="#{tipomanutencaoController.selected.icAtivo}" 
+                                    required="true" 
+                                    requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
+                        <f:selectItem itemLabel="Sim" itemValue="S"/>  
+                        <f:selectItem itemLabel="Não" itemValue="N"/>  
+                    </p:selectOneRadio>
 <!--Pafrão pra as paginas manter. Copiar e colar esse trecho até o final do arquvo-->
                     </p:panelGrid>
                 </p:fieldset>
                 <br />
                 <div class="buttons">
                     <p:commandButton 
-                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.create}" update="formNovo" icon="ui-icon-check" />  
+                            id="button_salvar" value="Salvar" actionListener="#{tipomanutencaoController.create}" update="formNovo" icon="ui-icon-check" />  
                     <p:commandButton id="button_voltar"
                             value="Voltar"
-                            action="/tipoequipamento/List.xhtml"
+                            action="/tipomanutencao/List.xhtml"
                             immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
                             ajax="false" onclick="form.target='_self'"/>
                 </div>

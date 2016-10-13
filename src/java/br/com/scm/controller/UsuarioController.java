@@ -8,6 +8,7 @@ import br.com.scm.facade.UsuarioFacade;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -23,7 +24,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Named("usuarioController")
-@SessionScoped
+//@SessionScoped
+@RequestScoped
 public class UsuarioController implements Serializable {
 
     private Usuario current;

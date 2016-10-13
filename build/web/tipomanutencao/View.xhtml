@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTipomanutencaoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTipomanutencaoLabel_idTipoManutencao}"/>
+                    <h:outputText value="#{tipomanutencaoController.selected.idTipoManutencao}" title="#{bundle.ViewTipomanutencaoTitle_idTipoManutencao}"/>
+                    <h:outputText value="#{bundle.ViewTipomanutencaoLabel_txTipoManutencao}"/>
+                    <h:outputText value="#{tipomanutencaoController.selected.txTipoManutencao}" title="#{bundle.ViewTipomanutencaoTitle_txTipoManutencao}"/>
+                    <h:outputText value="#{bundle.ViewTipomanutencaoLabel_idAtivoTipoManutencao}"/>
+                    <h:outputText value="#{tipomanutencaoController.selected.idAtivoTipoManutencao}" title="#{bundle.ViewTipomanutencaoTitle_idAtivoTipoManutencao}"/>
+                    <h:outputText value="#{bundle.ViewTipomanutencaoLabel_idExcluidoTipoManutencao}"/>
+                    <h:outputText value="#{tipomanutencaoController.selected.idExcluidoTipoManutencao}" title="#{bundle.ViewTipomanutencaoTitle_idExcluidoTipoManutencao}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipomanutencaoController.destroyAndView}" value="#{bundle.ViewTipomanutencaoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTipomanutencaoEditLink}"/>
+                <br />
+                <h:commandLink action="#{tipomanutencaoController.prepareCreate}" value="#{bundle.ViewTipomanutencaoCreateLink}" />
+                <br />
+                <h:commandLink action="#{tipomanutencaoController.prepareList}" value="#{bundle.ViewTipomanutencaoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTipomanutencaoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

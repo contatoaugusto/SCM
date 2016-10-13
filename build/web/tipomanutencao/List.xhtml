@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    template="/templates/Template.xhtml">
+
+    <ui:define name="metadata"/>
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <p:fieldset id="fieldset_consulta_prontuario" legend="Tipo de Manutenção">
+                <h:form id="formConsultarTipoEquipamento">
+                    <h:panelGroup rendered="#{tipomanutencaoController.items.rowCount > 0}">
+                        <p:dataTable value="#{tipomanutencaoController.items}" var="item"
+                                     emptyMessage="#{bundle_scm.PesquisaItemInexistente }"
+                                     paginatorPosition="bottom" rows="10" paginator="true" 
+                                     rowKey="#{item.idTipoManutencao}" selectionMode="single">
+<!--Fim de forma padrão de abertura da página listar. Copiar e colar em todas as outras esse trecho até aqui-->
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListTipomanutencaoTitle_txTipoManutencao}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.txTipoManutencao}"/>
+                            </p:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink action="#{tipomanutencaoController.prepareView}" value="#{bundle.ListTipomanutencaoViewLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{tipomanutencaoController.prepareEdit}" value="#{bundle.ListTipomanutencaoEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{tipomanutencaoController.destroy}" value="#{bundle.ListTipomanutencaoDestroyLink}"/>
+                            </h:column>
+
+<!--Fechamento padrão de página listar. Copiar e colar esse trecho até o final--> 
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <p:commandButton id="button_incluinovoTipoEquipamento" 
+                        action="#{tipomanutencaoController.prepareCreate}" 
+                        icon="ui-icon-folder-open" 
+                        value="Novo"
+                        ajax="false" onclick="form.target='_self'"/>               
+                </h:form>
+            </p:fieldset>
+        </h:body>
+    </ui:define>
+</ui:composition>
