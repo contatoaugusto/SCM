@@ -30,21 +30,21 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public class CustomAuthenticationManager implements AuthenticationManager {
 
-	private static final Log log = LogFactory
-			.getLog(CustomAuthenticationManager.class);
+    private static final Log log = LogFactory
+                    .getLog(CustomAuthenticationManager.class);
 
-	//private UsuarioDao usuarioDao = new UsuarioDao();
+    //private UsuarioDao usuarioDao = new UsuarioDao();
 
-	private ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
+    private ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
 
-	public Authentication authenticate(Authentication auth)
-			throws AuthenticationException {
+    @Override
+    public Authentication authenticate(Authentication auth) throws AuthenticationException {
 
-		log.debug("Na classe CustomAuthenticationManager. Iniciando o m�todo authenticate()");
+        log.debug("Na classe CustomAuthenticationManager. Iniciando o m�todo authenticate()");
 
-		//ControleAcessoUsuario usuario = null;
-		
-		try {
+        //ControleAcessoUsuario usuario = null;
+
+        try {
 
 //			ControleAcessoUsuarioDao usuariohome = new ControleAcessoUsuarioDao();
 //			usuario = usuariohome.findUsuarioByName(auth.getName());
@@ -53,41 +53,41 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 //				log.error("Usu�rio " + auth.getName() + " n�o encontrado!");
 //				throw new BadCredentialsException("Usu�rio " + auth.getName() + " n�o encontrado!");
 //			}
-		} catch (NoResultException e) {
-			log.error(e.getMessage());
-			throw new BadCredentialsException(e.getMessage());
-		}catch (Exception e) {
-			log.error(e.getMessage());
-			throw new BadCredentialsException(e.getMessage());
-		}
-		
+        } catch (NoResultException e) {
+                log.error(e.getMessage());
+                throw new BadCredentialsException(e.getMessage());
+        }catch (Exception e) {
+                log.error(e.getMessage());
+                throw new BadCredentialsException(e.getMessage());
+        }
 
-		// Comparar senhas
-		// Assegura que decodifica a senha antes de comparar
-		if (passwordEncoder.isPasswordValid("teste" /*usuario.getDsSenha()*/,
-				(String) auth.getCredentials(), null) == false) {
-			log.error("Senha Iconrreta!");
-			throw new BadCredentialsException("Senha Incorreta!");
-		}
 
-		// Here's the main logic of this custom authentication manager
-		// Username and password must be the same to authenticate
+        // Comparar senhas
+        // Assegura que decodifica a senha antes de comparar
+        if (passwordEncoder.isPasswordValid("teste" /*usuario.getDsSenha()*/,
+                        (String) auth.getCredentials(), null) == false) {
+                log.error("Senha Iconrreta!");
+                throw new BadCredentialsException("Senha Incorreta!");
+        }
+
+        // Here's the main logic of this custom authentication manager
+        // Username and password must be the same to authenticate
 //		if (!auth.getName().equals(auth.getCredentials())) {
 //			log.debug("O usu�rio informado ou a senha incorretos!");
 //			throw new BadCredentialsException("O usu�rio informado ou a senha incorretos!");
 
 //		} else {
-			// Em nossa abordagem, se chegou até aqui é porque o usuario tem
-			// acesso ao recurso solicitado e pode prosseguir.
-			log.debug("Todos os dados do usuário estão corretos e pronto pra prosseguir");
-			//HttpSession session = auth. request.getSession(true);
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-			attr.getRequest().getSession(true); 
-			attr.getRequest().getSession().setAttribute("usuario", null);//usuario);
-			return new UsernamePasswordAuthenticationToken(auth.getName(),
-					auth.getCredentials(), getAuthoritiesByUser());//usuario));
+                // Em nossa abordagem, se chegou até aqui é porque o usuario tem
+                // acesso ao recurso solicitado e pode prosseguir.
+        log.debug("Todos os dados do usuário estão corretos e pronto pra prosseguir");
+        //HttpSession session = auth. request.getSession(true);
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        attr.getRequest().getSession(true); 
+        attr.getRequest().getSession().setAttribute("usuario", null);//usuario);
+        return new UsernamePasswordAuthenticationToken(auth.getName(),
+                        auth.getCredentials(), getAuthoritiesByUser());//usuario));
 //		}
-	}
+    }
 
 	/**
 	 * Retorna tipo ROLE dependendo do n�vel de acesso, o qual � definido por um Integer.

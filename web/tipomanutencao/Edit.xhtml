@@ -1,40 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/Template.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.EditTipomanutencaoTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditTipomanutencaoLabel_idTipoManutencao}" for="idTipoManutencao" />
-                    <h:inputText id="idTipoManutencao" value="#{tipomanutencaoController.selected.idTipoManutencao}" title="#{bundle.EditTipomanutencaoTitle_idTipoManutencao}" required="true" requiredMessage="#{bundle.EditTipomanutencaoRequiredMessage_idTipoManutencao}"/>
-                    <h:outputLabel value="#{bundle.EditTipomanutencaoLabel_txTipoManutencao}" for="txTipoManutencao" />
-                    <h:inputText id="txTipoManutencao" value="#{tipomanutencaoController.selected.txTipoManutencao}" title="#{bundle.EditTipomanutencaoTitle_txTipoManutencao}" required="true" requiredMessage="#{bundle.EditTipomanutencaoRequiredMessage_txTipoManutencao}"/>
-                    <h:outputLabel value="#{bundle.EditTipomanutencaoLabel_idAtivoTipoManutencao}" for="idAtivoTipoManutencao" />
-                    <h:inputText id="idAtivoTipoManutencao" value="#{tipomanutencaoController.selected.idAtivoTipoManutencao}" title="#{bundle.EditTipomanutencaoTitle_idAtivoTipoManutencao}" />
-                    <h:outputLabel value="#{bundle.EditTipomanutencaoLabel_idExcluidoTipoManutencao}" for="idExcluidoTipoManutencao" />
-                    <h:inputText id="idExcluidoTipoManutencao" value="#{tipomanutencaoController.selected.idExcluidoTipoManutencao}" title="#{bundle.EditTipomanutencaoTitle_idExcluidoTipoManutencao}" />
-                </h:panelGrid>
-                <h:commandLink action="#{tipomanutencaoController.update}" value="#{bundle.EditTipomanutencaoSaveLink}"/>
+    <ui:define name="metadata" />
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <h:form id="formEdit"  prependId="false" enctype="multipart/form-data">
+                <h:inputHidden value="#{tipomanutencaoController.selected.idTipoManutencao}" />
                 <br />
+                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Atualizar Tipo Manutenção">
+                    <div class="input-and-label"></div>
+                    <p:panelGrid columns="2">
+ <!--Padrão para as paginas Create. Copiar e colar trecho do início até aqui-->
+ 
+                    <p:outputLabel value="Nome:" for="txTipoManutencao" />
+                    <p:inputText style="width: 600px;" id="txTipoManutencao" value="#{tipomanutencaoController.selected.txTipoManutencao}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                    
+                    <p:outputLabel value="Ativo:" for="radio_ativo" />
+                        <p:selectOneRadio 
+                                    id="radio_ativo" 
+                                    value="#{tipomanutencaoController.selected.icAtivo}" 
+                                    required="true" 
+                                    requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
+                        <f:selectItem itemLabel="Sim" itemValue="S"/>  
+                        <f:selectItem itemLabel="Não" itemValue="N"/>  
+                    </p:selectOneRadio>
+                       
+<!--Padrão para as paginas Edit. Copiar e colar trecho deste ponto até o final do arquivo-->                        
+                    </p:panelGrid>
+                </p:fieldset>
                 <br />
-                <h:link outcome="View" value="#{bundle.EditTipomanutencaoViewLink}"/>
+                <div class="buttons">
+                    <p:commandButton 
+                            id="button_salvar" value="Salvar" actionListener="#{tipomanutencaoController.update}" update=":formEdit" icon="ui-icon-check" />  
+                    <p:commandButton id="button_voltar"
+                            value="Voltar"
+                            action="/tipomanutencao/List.xhtml"
+                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
+                            ajax="false" onclick="form.target='_blank'"/>
+                </div>
                 <br />
-                <h:commandLink action="#{tipomanutencaoController.prepareList}" value="#{bundle.EditTipomanutencaoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditTipomanutencaoIndexLink}" />
             </h:form>
-        </ui:define>
-    </ui:composition>
-
-</html>
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -10,10 +10,13 @@
     <ui:define name="content">
         <h:body style="font-size:small;padding:0px;">
             <h:form id="formCadastroTipoEquipamento"  prependId="false" enctype="multipart/form-data">
+                <h:inputHidden value="#{tipoequipamentoController.selected.idTipoEquipamento}" />
                 <br />
                 <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Atualizar Tipo de Equipamento">
                     <div class="input-and-label"></div>
                     <p:panelGrid columns="2">
+ <!--Padrão para as paginas Create. Copiar e colar trecho do início até aqui-->
+ 
                         <p:outputLabel value="Nome:" for="txTipoEquipamento" />
                         <p:inputText style="width: 600px;" id="txTipoEquipamento" value="#{tipoequipamentoController.selected.txTipoEquipamento}" title="#{bundle.EditTipoequipamentoTitle_txTipoEquipamento}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
                         
@@ -26,10 +29,11 @@
                             <f:selectItem itemLabel="Sim" itemValue="S"/>  
                             <f:selectItem itemLabel="Não" itemValue="N"/>  
                         </p:selectOneRadio>
+
                         
+<!--Padrão para as paginas Edit. Copiar e colar trecho deste ponto até o final do arquivo-->                        
                     </p:panelGrid>
                 </p:fieldset>
-
                 <br />
                 <div class="buttons">
                     <p:commandButton 
@@ -40,7 +44,7 @@
                             immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
                             ajax="false" onclick="form.target='_blank'"/>
                 </div>
-                    <br />
+                <br />
             </h:form>
         </h:body>
     </ui:define>

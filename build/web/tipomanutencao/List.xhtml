@@ -22,23 +22,27 @@
 
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTipomanutencaoTitle_txTipoManutencao}"/>
+                                    <h:outputText value="Nome"/>
                                 </f:facet>
                                 <h:outputText value="#{item.txTipoManutencao}"/>
                             </p:column>
-
-                            <h:column>
+                            <p:column width="50">
                                 <f:facet name="header">
-                                    <h:outputText value="&nbsp;"/>
+                                    <h:outputText value="Ativo"/>
                                 </f:facet>
-                                <h:commandLink action="#{tipomanutencaoController.prepareView}" value="#{bundle.ListTipomanutencaoViewLink}"/>
-                                <h:outputText value=" "/>
-                                <h:commandLink action="#{tipomanutencaoController.prepareEdit}" value="#{bundle.ListTipomanutencaoEditLink}"/>
-                                <h:outputText value=" "/>
-                                <h:commandLink action="#{tipomanutencaoController.destroy}" value="#{bundle.ListTipomanutencaoDestroyLink}"/>
-                            </h:column>
+                                ${item.icAtivo == 'S' ? "Sim" : "Não"}
+                            </p:column>
 
-<!--Fechamento padrão de página listar. Copiar e colar esse trecho até o final--> 
+<!--Fechamento padrão de página listar. Copiar e colar esse trecho até o final-->                                 
+                            <p:column headerText="Ações" width="100">
+                                <h:commandLink action="#{tipomanutencaoController.prepareEdit}">
+                                    <p:graphicImage value="/resources/images/Text-Edit-icon.png" title="Editar"/>
+                                </h:commandLink>
+                                <h:commandLink action="#{tipomanutencaoController.destroy}" >
+                                    <p:graphicImage value="/resources/images/database-delete-icon.png" title="Deletar"/>
+                                </h:commandLink>
+                            </p:column>
+
                         </p:dataTable>
                     </h:panelGroup>
                     <br />

@@ -1,74 +1,76 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    template="/templates/Template.xhtml">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
-                    <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_idLogonUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idLogonUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_idMatriculaUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idMatriculaUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nmFuncionarioUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nmFuncionarioUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_idPerfilUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idPerfilUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_idSenhaUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idSenhaUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{usuarioController.prepareView}" value="#{bundle.ListUsuarioViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ListUsuarioCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListUsuarioIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+    <ui:define name="metadata"/>
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <p:fieldset id="fieldset_consulta_prontuario" legend="Tipo de Equipamento">
+                <h:form id="formConsultarTipoEquipamento">
+                    <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
+                        <p:dataTable value="#{usuarioController.items}" var="item"
+                                     emptyMessage="#{bundle_scm.PesquisaItemInexistente }"
+                                     paginatorPosition="bottom" rows="10" paginator="true" 
+                                     rowKey="#{item.idLogonUsuario}" selectionMode="single">
+<!--Fim de forma padrão de abertura da página listar. Copiar e colar em todas as outras esse trecho até aqui-->
 
-</html>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Login"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idLogonUsuario}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Matricula"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idMatriculaUsuario}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nmFuncionarioUsuario}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Perfil"/>
+                                </f:facet>
+                                ${item.idPerfilUsuario == 1 ? "Administrador" : item.idPerfilUsuario == 2 ? "Setor de Suprimentos" : "Visitante"}
+                            </p:column>
+<!--                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUsuarioTitle_idSenhaUsuario}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idSenhaUsuario}"/>
+                            </p:column>-->
+
+<!--Fechamento padrão de página listar. Copiar e colar esse trecho até o final-->                                 
+                            <p:column headerText="Ações" width="100">
+                                <h:commandLink action="#{usuarioController.prepareEdit}">
+                                    <p:graphicImage value="/resources/images/Text-Edit-icon.png" title="Editar"/>
+                                </h:commandLink>
+                                <h:commandLink action="#{usuarioController.destroy}" >
+                                    <p:graphicImage value="/resources/images/database-delete-icon.png" title="Deletar"/>
+                                </h:commandLink>
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <p:commandButton id="button_incluinovoTipoEquipamento" 
+                        action="#{usuarioController.prepareCreate}" 
+                        icon="ui-icon-folder-open" 
+                        value="Novo"
+                        ajax="false" onclick="form.target='_self'"/>               
+                </h:form>
+            </p:fieldset>
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -101,7 +101,7 @@ public class TipomanutencaoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle_SCM").getString("AtualizacaoSucesso"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle_SCM").getString("AlteracaoSucesso"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle_SCM").getString("AlteracaoErro"));
