@@ -9,7 +9,7 @@
     <ui:define name="metadata" />
     <ui:define name="content">
         <h:body style="font-size:small;padding:0px;">
-            <h:form id="formCadastroTipoEquipamento"  prependId="false" enctype="multipart/form-data">
+            <h:form id="formAtualiza"  prependId="false" enctype="multipart/form-data">
                 <h:inputHidden value="#{tipoequipamentoController.selected.idTipoEquipamento}" />
                 <br />
                 <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Atualizar Tipo de Equipamento">
@@ -37,7 +37,7 @@
                 <br />
                 <div class="buttons">
                     <p:commandButton 
-                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.update}" update=":formCadastroTipoEquipamento" icon="ui-icon-check" />  
+                            id="button_salvar" value="Salvar" actionListener="#{tipoequipamentoController.update}" update=":formAtualiza" icon="ui-icon-check" />  
                     <p:commandButton id="button_voltar"
                             value="Voltar"
                             action="/tipoequipamento/List.xhtml"

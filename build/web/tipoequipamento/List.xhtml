@@ -11,8 +11,8 @@
     <ui:define name="metadata"/>
     <ui:define name="content">
         <h:body style="font-size:small;padding:0px;">
-            <p:fieldset id="fieldset_consulta_prontuario" legend="Tipo de Equipamento">
-                <h:form id="formConsultarTipoEquipamento">
+            <p:fieldset id="fieldset_lista" legend="Tipo de Equipamento">
+                <h:form id="formLista">
                     <h:panelGroup rendered="#{tipoequipamentoController.items.rowCount > 0}">
                         <p:dataTable value="#{tipoequipamentoController.items}" var="item"
                                      emptyMessage="#{bundle_scm.PesquisaItemInexistente }"
@@ -54,7 +54,7 @@
                         </p:dataTable>
                     </h:panelGroup>
                     <br />
-                    <p:commandButton id="button_incluinovoTipoEquipamento" 
+                    <p:commandButton id="button_incluinovo" 
                         action="#{tipoequipamentoController.prepareCreate}" 
                         icon="ui-icon-folder-open" 
                         value="Novo"

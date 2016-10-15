@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    template="/templates/Template.xhtml">
+
+    <ui:define name="metadata"/>
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <p:fieldset id="fieldset_lista" legend="Motivo Cancelamento">
+                <h:form id="formLista">
+                    <h:panelGroup rendered="#{motivocancelamentoController.items.rowCount > 0}">
+                        <p:dataTable value="#{motivocancelamentoController.items}" var="item"
+                                     emptyMessage="#{bundle_scm.PesquisaItemInexistente }"
+                                     paginatorPosition="bottom" rows="10" paginator="true" 
+                                     rowKey="#{item.idMotivoCancelamento}" selectionMode="single">
+<!--Fim de forma padrão de abertura da página listar. Copiar e colar em todas as outras esse trecho até aqui-->
+                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="#{item.txMotivoCancelamento}"/>
+                            </p:column>
+
+                            <p:column width="50">
+                                <f:facet name="header">
+                                    <h:outputText value="Ativo"/>
+                                </f:facet>
+                                ${item.icAtivo == 'S' ? "Sim" : "Não"}
+                            </p:column>
+
+
+<!--Fechamento padrão de página listar. Copiar e colar esse trecho até o final-->                                 
+                            <p:column headerText="Ações" width="100">
+                                <h:commandLink action="#{motivocancelamentoController.prepareEdit}">
+                                    <p:graphicImage value="/resources/images/Text-Edit-icon.png" title="Editar"/>
+                                </h:commandLink>
+                                <h:commandLink action="#{motivocancelamentoController.destroy}" >
+                                    <p:graphicImage value="/resources/images/database-delete-icon.png" title="Deletar"/>
+                                </h:commandLink>
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <p:commandButton id="button_incluinovo" 
+                        action="#{motivocancelamentoController.prepareCreate}" 
+                        icon="ui-icon-folder-open" 
+                        value="Novo"
+                        ajax="false" onclick="form.target='_self'"/>               
+                </h:form>
+            </p:fieldset>
+        </h:body>
+    </ui:define>
+</ui:composition>

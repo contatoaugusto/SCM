@@ -6,14 +6,39 @@
 
 	<h:form>	
 		<h:body style="font-size:small;padding:0px;">	
-                    <p:menu>  
-		        <p:submenu label="Cadastros">  
-		            <p:menuitem value="Tipo Equipamento" url="/tipoequipamento/List.xhtml" icon="ui-icon-disk" /> 
-                            <p:menuitem value="Tipo Manutenção" url="/tipomanutencao/List.xhtml" icon="ui-icon-disk" /> 
-                            <p:menuitem value="Usuário" url="/usuario/List.xhtml" icon="ui-icon-disk" /> 
+                    <p:panelMenu style="width:100%"> 
+		        <p:submenu label="Cadastros" >
+                            <p:submenu label="Motivo Atraso" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/motivoatraso/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/motivoatraso/Create.xhtml" icon="ui-icon-document" /> 
+                            </p:submenu>
+                            <p:submenu label="Motivo Cancelamento" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/motivocancelamento/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/motivocancelamento/Create.xhtml" icon="ui-icon-document" /> 
+                            </p:submenu>
+                            <p:submenu label="Tipo Equipamento" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/tipoequipamento/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/tipoequipamento/Create.xhtml" icon="ui-icon-document" />  
+                            </p:submenu>
+                            <p:submenu label="Tipo Ocorrência" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/tipoocorrencia/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/tipoocorrencia/Create.xhtml" icon="ui-icon-document" />  
+                            </p:submenu>
+                            <p:submenu label="Tipo Manutenção" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/tipomanutencao/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/tipomanutencao/Create.xhtml" icon="ui-icon-document" />  
+                            </p:submenu>
+                            <p:submenu label="Usuário" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/usuario/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/usuario/Create.xhtml" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            
+                        </p:submenu>
+                        <p:submenu label="Manutenção">
+                            <p:menuitem value="Tipo Equipamento" url="/tipoequipamento/List.xhtml" icon="ui-icon-disk" /> 
                         </p:submenu>
 		         
-		    </p:menu>
+                    </p:panelMenu>
 	    </h:body>
 	</h:form>		                      
 <!--            <p:accordionPanel id="menuPanel" style="font-size:small;padding:0px;" >   -->

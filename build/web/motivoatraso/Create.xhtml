@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/Template.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:define name="metadata" />
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <h:form id="formNovo"  prependId="false" enctype="multipart/form-data">
+                <br />
+                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Novo Motivo Atraso">
+                    <div class="input-and-label"></div>
+                    <p:panelGrid columns="2">
+<!--Padrão para as paginas Create. Copiar e colar trecho do início até aqui-->
+
+                    <p:outputLabel value="Nome:" for="txMotivoAtraso" />
+                    <p:inputText style="width: 600px;"  id="txMotivoAtraso" value="#{motivoatrasoController.selected.txMotivoAtraso}"  required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                        
+                    <p:outputLabel value="Ativo:" for="radio_ativo" />
+                    <p:selectOneRadio 
+                                    id="radio_ativo" 
+                                    value="#{motivoatrasoController.selected.icAtivo}" 
+                                    required="true" 
+                                    requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
+                        <f:selectItem itemLabel="Sim" itemValue="S"/>  
+                        <f:selectItem itemLabel="Não" itemValue="N"/>  
+                    </p:selectOneRadio>
+                        
+<!--Pafrão pra as paginas manter. Copiar e colar esse trecho até o final do arquvo-->
+                    </p:panelGrid>
+                </p:fieldset>
+                <br />
+                <div class="buttons">
+                    <p:commandButton 
+                            id="button_salvar" value="Salvar" actionListener="#{motivoatrasoController.create}" update="formNovo" icon="ui-icon-check" />  
+                    <p:commandButton id="button_voltar"
+                            value="Voltar"
+                            action="/motivoatraso/List.xhtml"
+                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
+                            ajax="false" onclick="form.target='_self'"/>
+                </div>
+                <br />
+                
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>

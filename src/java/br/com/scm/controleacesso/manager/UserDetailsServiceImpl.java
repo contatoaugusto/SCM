@@ -30,26 +30,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         /* user1/password1 --> ADMIN */
         Set<GrantedAuthority> authorities1 = new HashSet<GrantedAuthority>();
         authorities1.add(authorityAdmin);
-        UserDetails user1 = new UserDetailsImpl("admin", "admin", authorities1);
+        UserDetails user1 = new UserDetailsImpl("admin", "123", authorities1);
         userRepository.put("admin", user1);
 
         /* SUPRIMENTO */
         Set<GrantedAuthority> authorities4 = new HashSet<GrantedAuthority>();
         authorities4.add(authoritySuprimento);
-        UserDetails user4 = new UserDetailsImpl("suprimento", "suprimento", authorities4);
+        UserDetails user4 = new UserDetailsImpl("suprimento", "123", authorities4);
         userRepository.put("suprimento", user4);
         
         /* user2/password2 --> GUEST */
         Set<GrantedAuthority> authorities2 = new HashSet<GrantedAuthority>();
         authorities2.add(authorityGuest);
-        UserDetails user2 = new UserDetailsImpl("visitante", "visitante", authorities2);
+        UserDetails user2 = new UserDetailsImpl("visitante", "123", authorities2);
         userRepository.put("visitante", user2);
 
         /* user3/password3 --> ADMIN + GUEST */
         Set<GrantedAuthority> authorities3 = new HashSet<GrantedAuthority>();
         authorities3.add(authorityAdmin);
         authorities3.add(authorityGuest);
-        UserDetails user3 = new UserDetailsImpl("user3", "password3", authorities3);
+        UserDetails user3 = new UserDetailsImpl("user3", "123", authorities3);
         userRepository.put("user3", user3);
     }
 

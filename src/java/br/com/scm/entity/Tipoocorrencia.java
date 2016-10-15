@@ -39,9 +39,7 @@ public class Tipoocorrencia implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String txTipoOcorrencia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
+    @Size(max = 2)
     private String icAtivo;
 
     public Tipoocorrencia() {
@@ -51,10 +49,9 @@ public class Tipoocorrencia implements Serializable {
         this.idTipoOcorrencia = idTipoOcorrencia;
     }
 
-    public Tipoocorrencia(Integer idTipoOcorrencia, String txTipoOcorrencia, String icAtivo) {
+    public Tipoocorrencia(Integer idTipoOcorrencia, String txTipoOcorrencia) {
         this.idTipoOcorrencia = idTipoOcorrencia;
         this.txTipoOcorrencia = txTipoOcorrencia;
-        this.icAtivo = icAtivo;
     }
 
     public Integer getIdTipoOcorrencia() {
