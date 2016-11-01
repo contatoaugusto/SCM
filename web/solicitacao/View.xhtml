@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSolicitacaoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_idSolicitacao}"/>
+                    <h:outputText value="#{solicitacaoController.selected.idSolicitacao}" title="#{bundle.ViewSolicitacaoTitle_idSolicitacao}"/>
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_cdSgiSolicitacao}"/>
+                    <h:outputText value="#{solicitacaoController.selected.cdSgiSolicitacao}" title="#{bundle.ViewSolicitacaoTitle_cdSgiSolicitacao}"/>
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_nrMatriculaFuncionarioSolicitacao}"/>
+                    <h:outputText value="#{solicitacaoController.selected.nrMatriculaFuncionarioSolicitacao}" title="#{bundle.ViewSolicitacaoTitle_nrMatriculaFuncionarioSolicitacao}"/>
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_txNomeFuncionarioSolicitacao}"/>
+                    <h:outputText value="#{solicitacaoController.selected.txNomeFuncionarioSolicitacao}" title="#{bundle.ViewSolicitacaoTitle_txNomeFuncionarioSolicitacao}"/>
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_dtSolicitacaoSgi}"/>
+                    <h:outputText value="#{solicitacaoController.selected.dtSolicitacaoSgi}" title="#{bundle.ViewSolicitacaoTitle_dtSolicitacaoSgi}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitacaoLabel_txSolicitacaoSgi}"/>
+                    <h:outputText value="#{solicitacaoController.selected.txSolicitacaoSgi}" title="#{bundle.ViewSolicitacaoTitle_txSolicitacaoSgi}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitacaoController.destroyAndView}" value="#{bundle.ViewSolicitacaoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSolicitacaoEditLink}"/>
+                <br />
+                <h:commandLink action="#{solicitacaoController.prepareCreate}" value="#{bundle.ViewSolicitacaoCreateLink}" />
+                <br />
+                <h:commandLink action="#{solicitacaoController.prepareList}" value="#{bundle.ViewSolicitacaoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSolicitacaoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
