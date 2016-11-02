@@ -8,6 +8,10 @@
 		<h:body style="font-size:small;padding:0px;">	
                     <p:panelMenu style="width:100%"> 
 		        <p:submenu label="Cadastros" >
+                            <p:submenu label="Fornecedor" icon="ui-icon-extlink" transient="true">  
+                                <p:menuitem value="Listagem" url="/fornecedor/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
+                                <p:menuitem value="Novo" url="/fornecedor/Create.xhtml" icon="ui-icon-document" /> 
+                            </p:submenu>
                             <p:submenu label="Motivo Atraso" icon="ui-icon-extlink" transient="true">  
                                 <p:menuitem value="Listagem" url="/motivoatraso/List.xhtml" icon="ui-icon-grip-solid-horizontal"/>
                                 <p:menuitem value="Novo" url="/motivoatraso/Create.xhtml" icon="ui-icon-document" /> 

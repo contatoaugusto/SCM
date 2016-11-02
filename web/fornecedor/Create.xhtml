@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/Template.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:define name="metadata" />
+    <ui:define name="content">
+        <h:body style="font-size:small;padding:0px;">
+            <h:form id="formNovo"  prependId="false" enctype="multipart/form-data">
+                <br />
+                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Novo Fornecedor">
+                    <div class="input-and-label"></div>
+                    <p:panelGrid columns="4">
+<!--Padrão para as paginas Create. Copiar e colar trecho do início até aqui-->
+
+                    <p:selectOneRadio 
+                            id="radio_cpfcnpj" 
+                            value="#{fornecedorController.selected.idCpfCnpjFornecedor}" 
+                            required="true" 
+                            requiredMessage="#{bundle_scm.TelaCamposObrigatorios}">  
+                        <f:selectItem itemLabel="CPF" itemValue="1"/>  
+                        <f:selectItem itemLabel="CNPJ" itemValue="2"/>  
+                    </p:selectOneRadio>
+                    <p:inputText id="nrCpfCnpjFornecedor" value="#{fornecedorController.selected.nrCpfCnpjFornecedor}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                    
+                    <p:outputLabel value="Nome" for="nmFornecedor" />
+                    <p:inputText id="nmFornecedor" value="#{fornecedorController.selected.nmFornecedor}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                    
+                    <p:outputLabel value="Endereço" for="endereco" />
+                    <p:inputText id="endereco" value="#{fornecedorController.selected.endereco}" required="true" requiredMessage="#{bundle_scm.TelaCamposObrigatorios}"/>
+                    
+                    <p:outputLabel value="Cidade" for="cidade" />
+                    <p:inputText id="cidade" value="#{fornecedorController.selected.cidade}"/>
+                    
+                    <p:outputLabel value="UF" for="uf" />
+                    <p:inputText id="uf" value="#{fornecedorController.selected.uf}" />
+                    
+                    <p:outputLabel value="CEP" for="cep" />
+                    <p:inputText id="cep" value="#{fornecedorController.selected.cep}"  />
+                    
+                    <p:outputLabel value="Telefone" for="telefone" />
+                    <p:inputText id="telefone" value="#{fornecedorController.selected.telefone}"  />
+                    
+                    <p:outputLabel value="Fax" for="fax" />
+                    <p:inputText id="fax" value="#{fornecedorController.selected.fax}" />
+                    
+                    <p:outputLabel value="E-mail" for="email" />
+                    <p:inputText id="email" value="#{fornecedorController.selected.email}"/>
+                    
+                    <p:outputLabel value="Contato" for="contato" />
+                    <p:inputText id="contato" value="#{fornecedorController.selected.contato}"/>
+
+                    
+<!--Pafrão pra as paginas manter. Copiar e colar esse trecho até o final do arquvo-->
+                    </p:panelGrid>
+                </p:fieldset>
+                <br />
+                <div class="buttons">
+                    <p:commandButton 
+                            id="button_salvar" value="Salvar" actionListener="#{fornecedorController.create}" update="formNovo" icon="ui-icon-check" />  
+                    <p:commandButton id="button_voltar"
+                            value="Voltar"
+                            action="/fornecedor/List.xhtml"
+                            immediate="true" icon="ui-icon-arrowreturnthick-1-w" 
+                            ajax="false" onclick="form.target='_self'"/>
+                </div>
+                <br />
+                
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>
